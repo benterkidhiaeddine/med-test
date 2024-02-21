@@ -83,6 +83,8 @@ class ClinicalCase(TimeStamps):
         on_delete=models.CASCADE,
         related_name="clinical_cases",
         related_query_name="clinical_case",
+        blank= True,
+        null=True
     )
 
     
