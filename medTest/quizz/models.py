@@ -4,6 +4,15 @@ import datetime
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+#Model mixins
+class TimeStamps(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
 
 # Create your models here.
 class MedicalYear(models.Model):
@@ -20,44 +29,52 @@ class MedicalYear(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     label = models.CharField(max_length = 9,choices=MEDICAL_YEARS)
 
-class Subject(models.Model):
+
+class Subject(TimeStamps):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50)
     medical_year = models.ForeignKey('MedicalYear', on_delete= models.CASCADE, 
         related_name="subjects",
         related_query_name="subject",
+        null=True,
+        blank=True
          )
 
+    
+    
     def __str__(self) -> str:
         return self.name
 
-class Chapter(models.Model):
+class Chapter(TimeStamps):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length = 100 )
     subject = models.ForeignKey('Subject' , on_delete = models.CASCADE,  
         related_name="chapters",
-        related_query_name="chapter",
+        related_query_name="chapter",null=True,
+        blank=True
     )
     def __str__(self) -> str:
         return self.name
 
-class Course(models.Model):
+class Course(TimeStamps):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
 
     chapter = models.ForeignKey( 'Chapter',
         on_delete=models.CASCADE,
         related_name="courses",
-        related_query_name="course",
+        related_query_name="course",null=True,
+        blank=True
     )
 
     def __str__(self) -> str:
         return self.name
 
 
-class ClinicalCase(models.Model):
+class ClinicalCase(TimeStamps):
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     scenario = models.TextField()
 
     
@@ -71,8 +88,9 @@ class ClinicalCase(models.Model):
     
 
 
-class Question(models.Model):
+class Question(TimeStamps):
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     number = models.IntegerField(null=True, blank =True)
     calender_year = models.IntegerField()
     content = models.TextField()
@@ -80,13 +98,15 @@ class Question(models.Model):
         'Course',
         on_delete=models.CASCADE,
         related_name="questions",
-        related_query_name="question",
+        related_query_name="question",null=True,
+        blank=True
     )
     clinical_case = models.ForeignKey(
         'ClinicalCase',
         on_delete=models.CASCADE,
         related_name="questions",
-        related_query_name="question",
+        related_query_name="question",null=True,
+        blank=True
     )
 
 
@@ -96,7 +116,8 @@ class Question(models.Model):
 
 
 
-class Choice(models.Model):
+class Choice(TimeStamps):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     # Letters Choices
     class Letter(models.TextChoices):
         A = "a", _("A")
@@ -112,6 +133,8 @@ class Choice(models.Model):
         on_delete=models.CASCADE,
         related_name="choices",
         related_query_name="choice",
+        null=True,
+        blank=True
     )
 
     def __str__(self) -> str:
@@ -119,8 +142,9 @@ class Choice(models.Model):
 
 
 
-class Answer(models.Model):
+class Answer(TimeStamps):
    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
    
     #the answers will be for example a list of ["abc", "bd"] 
     letters_combinations = models.CharField(max_length = 5)
@@ -129,5 +153,6 @@ class Answer(models.Model):
         'Question',
         on_delete = models.CASCADE,
         related_name = 'answers',
-        related_query_name = 'answer'
+        related_query_name = 'answer',  null=True,
+        blank=True
     )
