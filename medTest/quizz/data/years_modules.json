@@ -1,0 +1,312 @@
+{
+    "1st": [
+        {
+            "name": "Anatomie",
+            "id": "d5ceb0a7-7ede-4729-b015-db9903b8acaa"
+        },
+        {
+            "name": "Biochimie",
+            "id": "0d7c17bc-7f28-49e4-9d2d-fd8ce48a935f"
+        },
+        {
+            "name": "Biophysique",
+            "id": "0d7dc7d5-980b-48e8-9926-39434d3b1723"
+        },
+        {
+            "name": "Biostatistique",
+            "id": "0d7c17bc-7f28-49e4-9d2d-fd8ce48a936f"
+        },
+        {
+            "name": "Chimie",
+            "id": "0d7c17bc-7f28-49e4-9d2d-fd8ce48a938f"
+        },
+        {
+            "name": "Cytologie",
+            "id": "c3227d8a-bfe1-4fb0-887d-47fe42fbbc3f"
+        },
+        {
+            "name": "Embryologie",
+            "id": "0719de51-1dcf-41bd-b783-878adcc85e4b"
+        },
+        {
+            "name": "Histologie",
+            "id": "78c220a1-901f-488e-a6a7-7b31f7c6c8f6"
+        },
+        {
+            "name": "Informatique",
+            "id": "0d7c17bc-7f28-49e4-9d2d-fd8ce48a937f"
+        },
+        {
+            "name": "Physiologie",
+            "id": "34912238-ce28-4048-a56a-c4c093d6147c"
+        },
+        {
+            "name": "SSH",
+            "id": "5eddc759-3c16-437e-b82d-b8ce9252698a"
+        }
+    ],
+    "2nd": [
+        {
+            "name": "Anatomie",
+            "id": "936fb59c-002e-4ff3-acba-b9b2ee3d2c32"
+        },
+        {
+            "name": "Biochimie",
+            "id": "ecd3fda8-9823-4291-a495-6cbbf1a630c1"
+        },
+        {
+            "name": "Génétique",
+            "id": "ce032fa8-1378-495c-b9ab-1fcaf1e3c3bc"
+        },
+        {
+            "name": "Immuno",
+            "id": "13ccfb08-9c4f-4454-9499-44ee184679de"
+        },
+        {
+            "name": "Physiologie",
+            "id": "e96a4ffe-ea05-4821-87c3-f60e6912cf0a"
+        }
+    ],
+    "3rd": [
+        {
+            "name": "Anatomie pathologique",
+            "id": "0e8bffb2-f3cd-4770-9eb9-8890aa57a9ec"
+        },
+        {
+            "name": "Biochimie",
+            "id": "42b326e9-768e-4fbf-8e94-26cf83c77a55"
+        }
+    ],
+    "4th": [
+        {
+            "name": "Cardiologie",
+            "id": "f0ade05a-cc78-43c1-a1d9-e2125e5ad59d"
+        },
+        {
+            "name": "Gastro hépato entérologie",
+            "id": "dcb655a2-877b-40fc-a48f-f4b15da8db9b"
+        },
+        {
+            "name": "Hématologie",
+            "id": "c83b9d80-0329-4afc-9a57-43a2aac1939c"
+        },
+        {
+            "name": "Maladies infectieuses",
+            "id": "a45f6ab2-3496-47f0-a425-f37267d35c2b"
+        },
+        {
+            "name": "Neurologie",
+            "id": "c2c753a0-af22-4501-a729-ed7e5a4e99cb"
+        },
+        {
+            "name": "Pneumo phtisiologie",
+            "id": "644cf0ab-7637-403f-8220-d6843b76a360"
+        }
+    ],
+    "5th": [
+        {
+            "name": "Endocrinologie",
+            "id": "5309cc44-75aa-47a7-afaf-d3b6307d946b"
+        },
+        {
+            "name": "Gynecologie",
+            "id": "d0835d8e-faed-4ee2-8cbd-fb83455157a3"
+        },
+        {
+            "name": "Médecine Physique et Réadaptation",
+            "id": "ebc81fc7-8619-4821-a20d-e6dbfb6ab9bc"
+        },
+        {
+            "name": "Orthopédie",
+            "id": "3913fa46-0189-48d2-8c4e-f83f1e30125c"
+        },
+        {
+            "name": "Pédiatrie",
+            "id": "8a3103e1-d97b-47a6-b7fd-d95e8c65d1bc"
+        },
+        {
+            "name": "Psychiatrie",
+            "id": "c89383cc-24ec-4ab0-96ff-ed9ecb8a7ddd"
+        },
+        {
+            "name": "Rhumatologie",
+            "id": "3129fb64-e5a2-4c7b-a60e-5b7f6e74fd8d"
+        },
+        {
+            "name": "Uro-nephrologie",
+            "id": "886c3e98-7656-4d69-9f1c-576a572711f5"
+        }
+    ],
+    "6th": [
+        {
+            "name": "Dermatologie",
+            "id": "d3a55d62-c9de-4a02-b6bf-1275d3d262f7"
+        },
+        {
+            "name": "Droit médical",
+            "id": "8c8ae544-118b-405d-b689-f594d038bcf2"
+        },
+        {
+            "name": "Économie de la santé",
+            "id": "66d43d9b-7734-4d97-b4cb-c9dc1c6fca08"
+        },
+        {
+            "name": "Épidémiologie",
+            "id": "1bd93f52-e889-4e84-940b-4bbd58478b67"
+        },
+        {
+            "name": "Medecine de travail",
+            "id": "471f94b1-9c52-4864-98e6-90bb1f4b2051"
+        },
+        {
+            "name": "Médecine légale",
+            "id": "bf5fe155-5c9f-4f78-8245-f7994126e2a1"
+        },
+        {
+            "name": "Ophtalmologie",
+            "id": "7ac81c5f-9385-4d2d-918c-03a5a5d2f336"
+        },
+        {
+            "name": "Orl",
+            "id": "a7966648-a1d7-436d-b631-fdc7392766a1"
+        },
+        {
+            "name": "Psychologie médicale",
+            "id": "c751b11d-9bb5-4246-b549-ea658b562ce5"
+        },
+        {
+            "name": "Thérapeutique",
+            "id": "6539c22e-e1a8-47bf-b9ca-39ed30ebfcf3"
+        },
+        {
+            "name": "Urgences médico-chirurgicales",
+            "id": "c46ff9de-9281-4166-9d42-b29e4ba3229e"
+        }
+    ],
+    "residency": [
+        {
+            "name": "Anatomie pathologique ",
+            "id": "05a837e6-4310-48be-9bb5-99a9eb2b684d"
+        },
+        {
+            "name": "Biochimie ",
+            "id": "c2c6f7b6-0e10-4f91-a594-b6407670710c"
+        },
+        {
+            "name": "Cardiologie ",
+            "id": "37dfe4d6-9043-4f45-86bf-36eab370e817"
+        },
+        {
+            "name": "Dermatologie ",
+            "id": "2c70cfae-78f8-4d72-b7dc-b02be367d954"
+        },
+        {
+            "name": "Endocrinologie ",
+            "id": "08cbd38d-6cc3-4ebe-9d82-a296aa9d2ccb"
+        },
+        {
+            "name": "Épidémiologie ",
+            "id": "781524ee-0e9b-4a49-ac31-7ad371d31abf"
+        },
+        {
+            "name": "Gastrologie ",
+            "id": "62666e83-6137-48e7-8831-dfb46622516f"
+        },
+        {
+            "name": "Gastrologie ",
+            "id": "588d0809-75f8-4c6a-a5d9-31ed284ee7f0"
+        },
+        {
+            "name": "Généralités ",
+            "id": "f14b1791-ad13-437e-bb51-e16bc4b174e1"
+        },
+        {
+            "name": "Génétique ",
+            "id": "f77b525f-1b25-4a82-86fe-3036b17744e0"
+        },
+        {
+            "name": "Gynecologie ",
+            "id": "b87cb884-c68e-4f95-82c2-3720f808ecb1"
+        },
+        {
+            "name": "Hématologie ",
+            "id": "75f6bb3b-0985-42b0-97b5-b6e5a6abf21a"
+        },
+        {
+            "name": "Hématologie ",
+            "id": "f193a9ce-ef60-4176-a255-e0f9a284dafa"
+        },
+        {
+            "name": "Immunologie ",
+            "id": "521c302a-c0ce-4fb7-af36-f740c60af46f"
+        },
+        {
+            "name": "Maladies infectieuses ",
+            "id": "ffe0d8e1-e128-48fe-9b36-c5999ff28da0"
+        },
+        {
+            "name": "Médecine de travail ",
+            "id": "4c26262b-b445-40be-823f-083fa373426f"
+        },
+        {
+            "name": "Médecine légale ",
+            "id": "8c4c741c-f9f4-49da-83b2-9ea4404532fa"
+        },
+        {
+            "name": "Néphrologie ",
+            "id": "9cf3dfd2-d7c1-40b7-ba52-162075df8c60"
+        },
+        {
+            "name": "Neurochirurgie ",
+            "id": "2160b183-fefb-492b-a027-bf72a9b1c466"
+        },
+        {
+            "name": "Neurologie ",
+            "id": "c69b6eac-339e-47fc-87ce-f0fe1e4ac8d8"
+        },
+        {
+            "name": "Ophtalmologie ",
+            "id": "6d107ef2-7f4f-4b86-bcb3-10e049d97591"
+        },
+        {
+            "name": "Orl ",
+            "id": "d12e3899-50ef-4de8-ae8b-1b03c947c316"
+        },
+        {
+            "name": "Orthopedie ",
+            "id": "2fc620b3-f579-42ad-a894-09e638c9447e"
+        },
+        {
+            "name": "Pédiatrie ",
+            "id": "feff0b99-486e-4a78-a611-ee2a12a41217"
+        },
+        {
+            "name": "Physiologie ",
+            "id": "51985564-03a3-4406-a281-4b13f60aa496"
+        },
+        {
+            "name": "Physiopathologie ",
+            "id": "775694a7-fe9c-45c4-8cfd-1f83f11c5693"
+        },
+        {
+            "name": "Pneumologie ",
+            "id": "be8e936a-8dd0-442d-9895-ea65edf87bc7"
+        },
+        {
+            "name": "Psychiatrie ",
+            "id": "824b370a-59dd-4aa6-9389-5109febf3c55"
+        },
+        {
+            "name": "Rhumatologie ",
+            "id": "69bfa3c7-04fa-43b8-b130-88ed76450203"
+        },
+        {
+            "name": "Urgence chirurgicale ",
+            "id": "3a74fce1-4491-4071-a575-a309acabdbfb"
+        },
+        {
+            "name": "Urologie ",
+            "id": "f1e1fc9c-4459-43bc-bd36-5d4b141d4e6a"
+        }
+    ]
+}
