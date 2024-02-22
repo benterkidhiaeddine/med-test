@@ -23,7 +23,7 @@ def load_clinicals(apps, schema_editor):
 
     
     # function that create clinicalCases
-    def parse_clinical(clinical):
+    def parse_clinical(clinical, course):
         questions = [] 
         
         for question in clinical["questions"]:
@@ -39,14 +39,14 @@ def load_clinicals(apps, schema_editor):
                 created_answer = Answer.objects.create(letters_combinations=answer)
                 answers.append(created_answer)
 
-            created_question = Question.objects.create(content=question["content"] , number=question["number"], calender_year = clinical["year"]) 
+            created_question = Question.objects.create(content=question["content"] , number=question["number"], calender_year = clinical["year"], is_clinical=True, course = course) 
             #Associate the choices and the answers with the question
             created_question.choices.add(*choices)
             created_question.answers.add(*answers)
        
             questions.append(created_question) 
 
-        created_clinical = ClinicalCase.objects.create(scenario=clinical["scenario"] , calender_year=clinical["year"] )
+        created_clinical = ClinicalCase.objects.create(scenario=clinical["scenario"] , calender_year=clinical["year"], course = course )
 
         #associate the questions with the clinical case
         created_clinical.questions.add(*questions)
@@ -70,9 +70,7 @@ def load_clinicals(apps, schema_editor):
         #Access the  clinicals in a specific course
         for clinical in course_clinicals[module_year_chapter_course]:
             #Parse and save into db
-            clinical_obj = parse_clinical(clinical)
-            clinical_obj.course = course
-            clinical_obj.save()
+            clinical_obj = parse_clinical(clinical, course)
     
     
 class Migration(migrations.Migration):
