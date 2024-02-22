@@ -76,7 +76,7 @@ class ClinicalCase(TimeStamps):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     scenario = models.TextField()
-
+    calender_year = models.IntegerField(null=True,blank = True)
     
     course = models.ForeignKey(
         'Course',
@@ -96,6 +96,8 @@ class Question(TimeStamps):
     number = models.IntegerField(null=True, blank =True)
     calender_year = models.IntegerField()
     content = models.TextField()
+    is_clinical = models.BooleanField(null= True, blank =True)
+    
     course = models.ForeignKey(
         'Course',
         on_delete=models.CASCADE,

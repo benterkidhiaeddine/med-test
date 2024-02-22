@@ -13,7 +13,7 @@ def load_years(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("quizz", "0002_alter_clinicalcase_course"),
+        ("quizz", "0001_initial"),
     ]
 
     operations = [

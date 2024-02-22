@@ -5,9 +5,6 @@ from django.conf import settings
 from django.db import migrations
 
 
-
-
-
 def load_chapters(apps, schema_editor):
     Subject = apps.get_model("quizz", "Subject")
     Chapter = apps.get_model("quizz", "Chapter")
