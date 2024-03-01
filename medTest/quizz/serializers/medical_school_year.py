@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from quizz.models import MedicalYear
+from ..models.medical_year import MedicalYear
 
 
 class MedicalSchoolYearSerialize(serializers.ModelSerializer):
