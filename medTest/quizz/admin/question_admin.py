@@ -8,6 +8,7 @@ class ChoiceInLine(admin.TabularInline):
     fields = ["letter", "content"]
     readonly_fields = ["letter", "content"]
     ordering = ["letter"]
+    show_change_link = True
 
 
 class AnswerInLine(admin.TabularInline):
@@ -15,6 +16,7 @@ class AnswerInLine(admin.TabularInline):
     fields = ["letters_combinations"]
     readonly_fields = ["letters_combinations"]
     ordering = ["letters_combinations"]
+    show_change_link = True
 
 
 class QuestionAdmin(admin.ModelAdmin):
