@@ -5,15 +5,60 @@ This is going to be a platform where medical students cas answer Multiple choice
 # Challenges
 
 The data for the multiple choice questions is not available simply for direct usage for a web application and must first be derived from test Files with different formats such as
-(.png , .jpeg , and .pdf) and they they need to be corrected , cleaned and organized in a structured matter to store in a SQL database . (Right now I am going with a SQL database because I am using Django and it works best with SQL type database such as PostGresSQL)
+(.png , .jpeg , and .pdf) and they need to be corrected , cleaned and organized in a structured manner to store in a SQL database . (Right now I am going with a SQL database because I am using Django and it works best with SQL type database such as PostGresSQL)
 
-# Roadmap
+# Installation Instructions
 
-- Create the basic feature for showing to the users a selection menu from where they can select the Subject they want to get tested on , The chapters from which the questions were derived and the different years.
 
-- Once the User selected all the necessary filters he will be shown a interface with the different questions and the choices , he can select whatever choices he wants and click
-  confirm to see how many he got right.
+# Docker installation
 
-- Include Authentication and different Users
 
+
+# Non Docker installation
+
+
+
+
+1. First install pipenv in your global python installation if you don't have it
+
+```
+pip install pipenv --user
+
+```
+
+2. run the following command to start a virtualenv and install dependencies
+
+```
+pipenv install
+
+```
+
+3. run the virtual environment of pipenv
+
+```
+pipenv shell
+
+```
+
+4.  cd into the directory of the project and run the migrations to create the database (At the moment it's an sqlite db just suitable for developemnt)
+
+```
+cd medTest
+python manage.py migrate
+
+```
+
+5. Once that setup you can run the development server with
+
+```
+python manage.py runserver 127.0.0.1:8000
+```
+
+
+- The development server will be running on port 8000, On your local machine.
+
+# Note about the developement server
+
+- This server is for developement purposes only and should not be used in production. In production we will be using a 
+wsgi server preferably gunicorn + Ngnix
 

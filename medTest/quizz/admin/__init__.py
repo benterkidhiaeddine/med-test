@@ -6,7 +6,6 @@ from quizz.admin.clinical_case_admin import ClinicalCaseAdmin
 from quizz.admin.course_admin import CourseAdmin
 from quizz.admin.question_admin import QuestionAdmin
 from quizz.admin.choice_admin import ChoiceAdmin
-from quizz.admin.answer_admin import AnswerAdmin
 
 from quizz.models.medical_year import MedicalYear
 from quizz.models.subject import Subject
