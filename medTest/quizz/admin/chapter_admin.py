@@ -5,10 +5,8 @@ class ChapterAdmin(admin.ModelAdmin):
     list_filter = ["subject", "subject__medical_year"]
     list_display = ["name", "subject", "get_medical_year"]
 
-    search_fields = ["subject"]
+    search_fields = ["subject__name"]
 
     @admin.display(ordering="subject__medical_year", description="Medical_Year")
     def get_medical_year(self, obj):
         return obj.subject.medical_year
-
-    pass

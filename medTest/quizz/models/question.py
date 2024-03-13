@@ -29,4 +29,4 @@ class Question(TimeStamps):
     )
 
     def __str__(self) -> str:
-        return self.content[0:20]
+        return str(self.number)
