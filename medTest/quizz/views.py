@@ -6,7 +6,7 @@ from rest_framework import status
 from quizz.serializers.medical_school_year import MedicalSchoolYearSerializer
 from quizz.serializers.subject import SubjectSerializer
 
-from quizz.models import MedicalYear, Subject
+from quizz.models import MedicalYear, Subject, Chapter
 
 
 # Create your views here.
@@ -24,18 +24,26 @@ def medical_school_years(request):
     return Response(serializer.data)
 
 
-# TODO View to return the subjects for each year
 @api_view(["GET"])
 def subjects(request, medical_year_id):
-    print(medical_year_id)
+
     subjects = Subject.objects.filter(medical_year__id=medical_year_id)
+    # Maybe change this error handling to a custom json?
+    if len(subjects) == 0:
+        return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = SubjectSerializer(subjects, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# TODO View to return the chapters for each subject
-def chapters(request):
-    pass
+@api_view(["GET"])
+def chapters(request, subject_id):
+    chapters = Chapter.objects.filter(subject__id=subject_id)
+    # Maybe change this error handling to a custom json?
+    if len(chapters) == 0:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = SubjectSerializer(chapters, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 # TODO View to return the courses for each chapter
@@ -44,10 +52,10 @@ def courses(request):
 
 
 # TODO View to return the theoretical questions for each course
-def courses(request):
+def clinical_cases(request):
     pass
 
 
-# TODO View to return the clinical_case questions for each course
-def courses(request):
+# TODO View to return the clinical_cases for each course
+def questions(request):
     pass
