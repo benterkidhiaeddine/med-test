@@ -1,5 +1,9 @@
 from django.urls import path
 from quizz import views
+import uuid
 
-
-urlpatterns = [path("", views.home), path("medical_years/", views.medical_school_years)]
+urlpatterns = [
+    path("", views.home),
+    path("medical_years/", views.medical_school_years),
+    path("medical_years/<uuid:medical_year_id>/subjects/", views.subjects),
+]
