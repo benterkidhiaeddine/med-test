@@ -25,7 +25,6 @@ erDiagram
         datetime created_at
         datetime updated_at
         string name 
-        string medical_year_id
     }
 
     Chapter {
@@ -33,7 +32,6 @@ erDiagram
         datetime created_at
         datetime updated_at
         string name
-        string subject_id
     }
 
     Course {
@@ -41,7 +39,6 @@ erDiagram
         datetime created_at
         datetime updated_at
         string name
-        string chapter_id
     }
 
 
@@ -51,8 +48,6 @@ erDiagram
         datetime updated_at
         string scenario
         int calender_year
-        string course_id
-
     }
 
     Question {
@@ -63,9 +58,6 @@ erDiagram
         int calender_year
         string content
         boolean is_clinical
-
-        string clinical_case_id
-        string course_id
     }
 
     Answer {
@@ -73,7 +65,6 @@ erDiagram
         datetime created_at
         datetime updated_at
         string letters_combinations
-        string question_id
     }
 
  
@@ -83,8 +74,6 @@ erDiagram
         datetime updated_at
         string content 
         string letter
-        string question_id
-
     }
 
     RevisionSession {
