@@ -7,4 +7,5 @@ urlpatterns = [
     path("medical_years/", views.medical_school_years),
     path("medical_years/<uuid:medical_year_id>/subjects/", views.subjects),
     path("subjects/<uuid:subject_id>/chapters/", views.chapters),
+    path("chapters/<uuid:chapter_id>/courses/", views.courses),
 ]
