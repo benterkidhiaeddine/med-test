@@ -5,3 +5,7 @@ from rest_framework import serializers
 # of subject ids
 class UUIDListField(serializers.ListField):
     child = serializers.UUIDField()
+
+
+class IntegerListField(serializers.ListField):
+    child = serializers.IntegerField()

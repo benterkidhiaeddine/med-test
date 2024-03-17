@@ -9,4 +9,5 @@ urlpatterns = [
     path("subjects/<uuid:subject_id>/chapters/", views.chapters),
     path("chapters/<uuid:chapter_id>/courses/", views.courses),
     path("available_years/", views.available_years),
+    path("revision/", views.revision),
 ]

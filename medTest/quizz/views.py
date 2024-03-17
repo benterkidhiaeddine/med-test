@@ -8,6 +8,7 @@ from quizz.serializers.subject import SubjectSerializer
 from quizz.serializers.course import CourseSerializer
 from quizz.serializers.available_years_payload import AvailableYearsPayloadSerializer
 from quizz.serializers.available_years_response import AvailableYearsResponseSerializer
+from quizz.serializers.revision_payload import RevisionPayload
 
 from quizz.models import MedicalYear, Subject, Chapter, Course, Question, ClinicalCase
 
@@ -97,17 +98,50 @@ def available_years(request):
         )
         if serializer.is_valid():
             return Response(data=serializer.data, status=status.HTTP_200_OK)
-        # If somthing went wrong doing the processing return a status error
+        # If something went wrong doing the processing return a status error
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-# TODO View to return the theoretical questions for each course
-def clinical_cases(request):
-    pass
+# for the current selection of courses and calender years ,
+# return a list of all available theoretical questions and clinical_cases objects
+@api_view(["POST"])
+def revision(request):
+    serializer = RevisionPayload(data=request.data)
+
+    if serializer.is_valid():
+        payload = serializer.data
+        course_id_list = payload["course_id_list"]
+        source_years = payload["source_years"]
+
+        # The list that will contain the queried ids and their entity type weather it's a clinical case or theoretical question
+        items = []
+
+        question_ids = Question.objects.filter(
+            course__id__in=course_id_list,
+            is_clinical=False,
+            calender_year__in=source_years,
+        ).values("id")
+
+        question_items = [
+            {"entity": "theory_question", "id": el["id"]} for el in question_ids
+        ]
+        items.extend(question_items)
+
+        clinical_case_ids = ClinicalCase.objects.filter(
+            course__id__in=course_id_list, calender_year__in=source_years
+        ).values("id")
+
+        clinical_case_items = [
+            {"entity": "clinical_case", "id": el["id"]} for el in clinical_case_ids
+        ]
+
+        items.extend(clinical_case_items)
+
+        return Response(data=items, status=status.HTTP_200_OK)
+
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-# TODO View to return the clinical_cases for each course
-def questions(request):
-    pass
+# TODO : Return a question object with all it's choices answer , source medical year, calender_year , chapter and course
