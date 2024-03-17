@@ -6,8 +6,10 @@ from rest_framework import status
 from quizz.serializers.medical_school_year import MedicalSchoolYearSerializer
 from quizz.serializers.subject import SubjectSerializer
 from quizz.serializers.course import CourseSerializer
+from quizz.serializers.available_years_payload import AvailableYearsPayloadSerializer
+from quizz.serializers.available_years_response import AvailableYearsResponseSerializer
 
-from quizz.models import MedicalYear, Subject, Chapter, Course
+from quizz.models import MedicalYear, Subject, Chapter, Course, Question, ClinicalCase
 
 
 # Create your views here.
@@ -56,6 +58,49 @@ def courses(request, chapter_id):
 
     serializer = CourseSerializer(courses, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# View to get the available years for the questions or the clinical cases according
+# To the selected courses
+@api_view(["POST"])
+def available_years(request):
+    serializer = AvailableYearsPayloadSerializer(data=request.data)
+    if serializer.is_valid():
+        payload = serializer.data
+        course_id_list = payload["course_id_list"]
+
+        available_years = set()
+
+        for course_id in course_id_list:
+            # Query the questions table to get the available distinct years there
+            question_years = list(
+                Question.objects.filter(course__id=course_id, is_clinical=False)
+                .values("calender_year")
+                .distinct()
+            )
+            # Query the clinical case table to get the available distinct years there
+            clinical_cases_years = list(
+                ClinicalCase.objects.filter(course__id=course_id)
+                .values("calender_year")
+                .distinct()
+            )
+
+            # Transform from the dict list to just a list containing the years
+            question_years = [el["calender_year"] for el in question_years]
+            clinical_cases_years = [el["calender_year"] for el in clinical_cases_years]
+
+            available_years.update(question_years, clinical_cases_years)
+
+        # Create a serializer to json encode the list of available years
+        serializer = AvailableYearsResponseSerializer(
+            data={"available_years": list(available_years)}
+        )
+        if serializer.is_valid():
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+        # If somthing went wrong doing the processing return a status error
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 # TODO View to return the theoretical questions for each course

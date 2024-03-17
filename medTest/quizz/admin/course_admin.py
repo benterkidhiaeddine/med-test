@@ -5,6 +5,8 @@ class CourseAdmin(admin.ModelAdmin):
     list_filter = ["chapter", "chapter__subject", "chapter__subject__medical_year"]
     list_display = ["name", "chapter", "get_chapter", "get_subject", "get_medical_year"]
 
+    search_fields = ["id"]
+
     @admin.display(ordering="course_chapter", description="Chapter")
     def get_chapter(self, obj):
         return obj.chapter
