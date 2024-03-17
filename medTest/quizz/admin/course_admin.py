@@ -1,4 +1,20 @@
 from django.contrib import admin
+from ..models.question import Question
+from ..models.clinical_case import ClinicalCase
+
+
+class ClinicalCaseInLine(admin.TabularInline):
+    model = ClinicalCase
+    fields = ["id", "scenario"]
+    readonly_fields = ["id", "scenario"]
+    show_change_link = True
+
+
+class QuestionInLine(admin.TabularInline):
+    model = Question
+    fields = ["id", "content"]
+    readonly_fields = ["id", "content"]
+    show_change_link = True
 
 
 class CourseAdmin(admin.ModelAdmin):
@@ -19,4 +35,4 @@ class CourseAdmin(admin.ModelAdmin):
     def get_medical_year(self, obj):
         return obj.chapter.subject.medical_year
 
-    pass
+    inlines = [ClinicalCaseInLine, QuestionInLine]
