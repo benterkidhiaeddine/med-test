@@ -1,0 +1,377 @@
+{
+	"info": {
+		"_postman_id": "2241a71c-549b-47fd-b2b2-0f89b20d8fb1",
+		"name": "MedTestApi",
+		"description": "# 🚀",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26085348"
+	},
+	"item": [
+		{
+			"name": "Get medical  years",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/medical_years/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"medical_years",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get subjects for specific medical year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/medical_years/{{medical_year_id}}/subjects/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"medical_years",
+						"{{medical_year_id}}",
+						"subjects",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get chapters for specific subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/subjects/{{subject_id}}/chapters/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"subjects",
+						"{{subject_id}}",
+						"chapters",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get courses for specific chapter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/chapters/{{chapter_id}}/courses/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"chapters",
+						"{{chapter_id}}",
+						"courses",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get available years for the selected courses",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required field - available_years\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.available_years).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Available years is an array\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.available_years).to.be.an('array');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Available years array is not empty\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.available_years).to.exist.and.to.have.lengthOf.at.least(1, \"Available years array should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Available years array contains only positive integers\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.available_years).to.be.an('array');",
+							"    ",
+							"    responseData.available_years.forEach(function(year) {",
+							"        pm.expect(year).to.be.a('number');",
+							"        pm.expect(year).to.be.above(0);",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"course_id_list\" : [\r\n        \r\n            \"26270713-9c6b-4146-9f41-0cad02a4314a\",\r\n            \"2b8d7750-5111-49f9-805a-3453c4c8a608\"\r\n        \r\n    ]\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/available_years/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"available_years",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the list of theorticial question ids and clinical case id for the current selection of courses and calender years",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(item){",
+							"        pm.expect(item.entity).to.exist.and.to.be.a('string');",
+							"        pm.expect(item.id).to.exist.and.to.be.a('string');",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Entity is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    ",
+							"    responseData.forEach(function(item) {",
+							"        pm.expect(item.entity).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Entity should not be empty\");",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"ID is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"",
+							"  pm.expect(responseData).to.be.an('array');",
+							"  responseData.forEach(function (item) {",
+							"    pm.expect(item.id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"ID should not be empty\");",
+							"  });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content-Type header is set to 'application/json'\", function () {",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.equal('application/json');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"course_id_list\" : [\r\n            \"26270713-9c6b-4146-9f41-0cad02a4314a\",\r\n            \"2b8d7750-5111-49f9-805a-3453c4c8a608\"   \r\n    ],\r\n    \"source_years\": [\r\n        2024,\r\n        2022,\r\n        2023\r\n    ]\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/revision/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"revision",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "medical_year_id",
+			"value": "ae771af2-79ac-4884-bb4e-9a40627ab0a8",
+			"type": "string"
+		},
+		{
+			"key": "subject_id",
+			"value": "691beee5-75e5-4b8b-aefb-24d9f5019fc0"
+		},
+		{
+			"key": "chapter_id",
+			"value": "63836862-a5fc-45f0-9279-951a533ae91d",
+			"type": "string"
+		}
+	]
+}
