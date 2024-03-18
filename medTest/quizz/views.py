@@ -10,7 +10,7 @@ from quizz.serializers.available_years_payload import AvailableYearsPayloadSeria
 from quizz.serializers.available_years_response import AvailableYearsResponseSerializer
 from quizz.serializers.revision_payload import RevisionPayload
 
-from quizz.services import get_available_years
+from quizz.services import get_available_years, get_revision_items
 
 
 from quizz.models import MedicalYear, Subject, Chapter, Course, Question, ClinicalCase
@@ -98,31 +98,9 @@ def revision(request):
         course_id_list = payload["course_id_list"]
         source_years = payload["source_years"]
 
-        # The list that will contain the queried ids and their entity type weather it's a clinical case or theoretical question
-        items = []
+        revision_items = get_revision_items(course_id_list, source_years)
 
-        question_ids = Question.objects.filter(
-            course__id__in=course_id_list,
-            is_clinical=False,
-            calender_year__in=source_years,
-        ).values("id")
-
-        question_items = [
-            {"entity": "theory_question", "id": el["id"]} for el in question_ids
-        ]
-        items.extend(question_items)
-
-        clinical_case_ids = ClinicalCase.objects.filter(
-            course__id__in=course_id_list, calender_year__in=source_years
-        ).values("id")
-
-        clinical_case_items = [
-            {"entity": "clinical_case", "id": el["id"]} for el in clinical_case_ids
-        ]
-
-        items.extend(clinical_case_items)
-
-        return Response(data=items, status=status.HTTP_200_OK)
+        return Response(data=revision_items, status=status.HTTP_200_OK)
 
     return Response(status=status.HTTP_400_BAD_REQUEST)
 

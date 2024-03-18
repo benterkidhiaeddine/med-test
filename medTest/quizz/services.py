@@ -43,3 +43,53 @@ def get_available_years(course_id_list: List[UUID]) -> List[int]:
     available_years.update(question_years, clinical_cases_years)
 
     return list(available_years)
+
+
+def get_revision_items(
+    course_id_list: List[UUID], source_years: List[int]
+) -> List[dict]:
+    """
+
+    this function returns a list of entities . an Entity in this context is a dict that contains information about
+    the type of the entity : it's either a clinical case or a theory question plus it's corresponding id
+
+    Args:
+        course_id_list (List[UUID]): List of the course ids
+        source_years (List[int]): List of the source years for which we want to filter the questions or the
+        clinical cases
+
+    Returns:
+        List[dict]: it has the following shape
+        [
+            {
+                "entity" : "clinical_case/theory_question",
+                "id" : "UUID-example"
+            },
+            ...
+        ]
+    """
+    # The list that will contain the queried ids and their entity type weather it's a clinical case or theoretical question
+    items = []
+
+    question_ids = Question.objects.filter(
+        course__id__in=course_id_list,
+        is_clinical=False,
+        calender_year__in=source_years,
+    ).values("id")
+
+    question_items = [
+        {"entity": "theory_question", "id": el["id"]} for el in question_ids
+    ]
+    items.extend(question_items)
+
+    clinical_case_ids = ClinicalCase.objects.filter(
+        course__id__in=course_id_list, calender_year__in=source_years
+    ).values("id")
+
+    clinical_case_items = [
+        {"entity": "clinical_case", "id": el["id"]} for el in clinical_case_ids
+    ]
+
+    items.extend(clinical_case_items)
+
+    return items
