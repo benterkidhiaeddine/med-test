@@ -10,6 +10,9 @@ from quizz.serializers.available_years_payload import AvailableYearsPayloadSeria
 from quizz.serializers.available_years_response import AvailableYearsResponseSerializer
 from quizz.serializers.revision_payload import RevisionPayload
 
+from quizz.services import get_available_years
+
+
 from quizz.models import MedicalYear, Subject, Chapter, Course, Question, ClinicalCase
 
 
@@ -70,31 +73,11 @@ def available_years(request):
         payload = serializer.data
         course_id_list = payload["course_id_list"]
 
-        available_years = set()
-
-        for course_id in course_id_list:
-            # Query the questions table to get the available distinct years there
-            question_years = list(
-                Question.objects.filter(course__id=course_id, is_clinical=False)
-                .values("calender_year")
-                .distinct()
-            )
-            # Query the clinical case table to get the available distinct years there
-            clinical_cases_years = list(
-                ClinicalCase.objects.filter(course__id=course_id)
-                .values("calender_year")
-                .distinct()
-            )
-
-            # Transform from the dict list to just a list containing the years
-            question_years = [el["calender_year"] for el in question_years]
-            clinical_cases_years = [el["calender_year"] for el in clinical_cases_years]
-
-            available_years.update(question_years, clinical_cases_years)
+        available_years = get_available_years(course_id_list)
 
         # Create a serializer to json encode the list of available years
         serializer = AvailableYearsResponseSerializer(
-            data={"available_years": list(available_years)}
+            data={"available_years": available_years}
         )
         if serializer.is_valid():
             return Response(data=serializer.data, status=status.HTTP_200_OK)
