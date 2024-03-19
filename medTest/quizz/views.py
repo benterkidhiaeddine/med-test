@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,6 +9,8 @@ from quizz.serializers.course import CourseSerializer
 from quizz.serializers.available_years_payload import AvailableYearsPayloadSerializer
 from quizz.serializers.available_years_response import AvailableYearsResponseSerializer
 from quizz.serializers.revision_payload import RevisionPayload
+from quizz.serializers.question import QuestionResponseSerializer
+from quizz.serializers.clinical_case import ClinicalCaseResponseSerializer
 
 from quizz.services import get_available_years, get_revision_items
 
@@ -105,4 +107,21 @@ def revision(request):
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-# TODO : Return a question object with all it's choices answer , source medical year, calender_year , chapter and course
+@api_view(["GET"])
+def question_by_id(request, question_id):
+
+    question = get_object_or_404(Question, pk=question_id)
+
+    serializer = QuestionResponseSerializer(instance=question)
+
+    return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+def clinical_case_by_id(request, clinical_case_id):
+
+    clinical_case = get_object_or_404(ClinicalCase, pk=clinical_case_id)
+
+    serializer = ClinicalCaseResponseSerializer(instance=clinical_case)
+
+    return Response(data=serializer.data, status=status.HTTP_200_OK)

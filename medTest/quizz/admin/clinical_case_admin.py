@@ -18,6 +18,7 @@ class ClinicalCaseAdmin(admin.ModelAdmin):
         "course__chapter__subject__medical_year",
     ]
     list_display = [
+        "id",
         "scenario",
         "calender_year",
         "get_course",

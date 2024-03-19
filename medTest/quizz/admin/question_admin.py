@@ -38,6 +38,8 @@ class QuestionAdmin(admin.ModelAdmin):
         "get_medical_year",
     ]
 
+    search_fields = ["id"]
+
     @admin.display(ordering="question_chapter", description="Chapter")
     def get_chapter(self, obj):
         return obj.course.chapter
