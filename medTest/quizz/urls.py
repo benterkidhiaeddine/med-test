@@ -1,6 +1,5 @@
 from django.urls import path
 from quizz import views
-import uuid
 
 urlpatterns = [
     path("", views.home),
