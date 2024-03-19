@@ -328,6 +328,44 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get a question by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/questions/{{question_id}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"questions",
+						"{{question_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get clinical case by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/clinical_cases/{{clinical_case_id}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"clinical_cases",
+						"{{clinical_case_id}}",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -371,6 +409,16 @@
 		{
 			"key": "chapter_id",
 			"value": "63836862-a5fc-45f0-9279-951a533ae91d",
+			"type": "string"
+		},
+		{
+			"key": "question_id",
+			"value": "9388a0a3-59c3-4f5f-bf26-e5abe3807e1b",
+			"type": "string"
+		},
+		{
+			"key": "clinical_case_id",
+			"value": "fffde572-5b23-474e-a8ad-4899a8c62b32",
 			"type": "string"
 		}
 	]
