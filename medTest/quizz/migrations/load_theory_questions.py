@@ -42,7 +42,7 @@ def load_theory_questions(apps, schema_editor):
         created_question.choices.add(*choices)
         created_question.answers.add(*answers)
 
-    with open(json_file_path) as f:
+    with open(json_file_path, encoding="utf-8") as f:
         course_questions = json.load(f)
 
     for module_year_chapter_course in course_questions.keys():

@@ -17,7 +17,7 @@ def load_subjects(apps, schema_editor):
 
 
 
-    with open(json_file_path) as f:
+    with open(json_file_path, encoding="utf-8") as f:
         years_modules = json.load(f)
 
     

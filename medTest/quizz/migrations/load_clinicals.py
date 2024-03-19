@@ -55,7 +55,7 @@ def load_clinicals(apps, schema_editor):
     
     
 
-    with open(json_file_path) as f:
+    with open(json_file_path, encoding="utf-8") as f:
         course_clinicals = json.load(f)
 
    

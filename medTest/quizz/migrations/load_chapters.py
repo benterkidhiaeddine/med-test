@@ -15,7 +15,7 @@ def load_chapters(apps, schema_editor):
 
 
 
-    with open(json_file_path) as f:
+    with open(json_file_path , encoding="utf-8") as f:
         chapter_modules = json.load(f)
 
    
