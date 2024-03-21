@@ -3,6 +3,7 @@ from ..models.medical_year import MedicalYear
 
 
 class MedicalSchoolYearSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = MedicalYear
-        fields = ["id", "label"]
+        fields = ["id", "label", "theory_questions_count", "clinical_cases_count"]
