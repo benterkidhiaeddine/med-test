@@ -2,8 +2,17 @@ from typing import List
 from uuid import UUID
 
 
+from .serializers.medical_school_year import MedicalSchoolYearSerializer
+from .serializers.subject import SubjectSerializer
+from .serializers.chapter import ChapterSerializer
+from .serializers.course import CourseSerializer
+
+from .models.medical_year import MedicalYear
 from .models.question import Question
 from .models.clinical_case import ClinicalCase
+from .models.subject import Subject
+from .models.chapter import Chapter
+from .models.course import Course
 
 
 def get_available_years(course_id_list: List[UUID]) -> List[int]:
@@ -93,3 +102,45 @@ def get_revision_items(
     items.extend(clinical_case_items)
 
     return items
+
+
+def get_medical_years():
+    """
+    returns  a list of medical years objects each containing the following information:
+    - medical_year_id
+    - medical_year_label or name
+    - medical_year theoretical_question_count and clinical_cases count
+
+    Returns:
+        dict : dict object containing the list of medical years objects
+    """
+    medical_years = MedicalYear.objects.all()
+    serializer = MedicalSchoolYearSerializer(medical_years, many=True)
+    response_data = {"medical_years": serializer.data}
+
+    return response_data
+
+
+# TODO: document this function
+def get_subjects_by_medical_year_id(medical_year_id: UUID) -> dict:
+
+    subjects = Subject.objects.filter(medical_year__id=medical_year_id)
+    serializer = SubjectSerializer(subjects, many=True)
+    response_data = {"subjects": serializer.data}
+
+    return response_data
+
+
+def get_chapters_by_subject_id(subject_id: UUID) -> dict:
+    chapters = Chapter.objects.filter(subject__id=subject_id)
+    serializer = ChapterSerializer(chapters, many=True)
+    response_data = {"chapters": serializer.data}
+
+    return response_data
+
+
+def get_courses_by_chapter_id(chapter_id: UUID) -> dict:
+    courses = Course.objects.filter(chapter_id=chapter_id)
+    serializer = CourseSerializer(courses, many=True)
+    response_data = {"courses": serializer.data}
+    return response_data

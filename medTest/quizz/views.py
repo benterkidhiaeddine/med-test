@@ -12,8 +12,14 @@ from quizz.serializers.revision_payload import RevisionPayload
 from quizz.serializers.question import QuestionResponseSerializer
 from quizz.serializers.clinical_case import ClinicalCaseResponseSerializer
 
-from quizz.services import get_available_years, get_revision_items
-
+from quizz.services import (
+    get_available_years,
+    get_revision_items,
+    get_medical_years,
+    get_subjects_by_medical_year_id,
+    get_chapters_by_subject_id,
+    get_courses_by_chapter_id,
+)
 
 from quizz.models import MedicalYear, Subject, Chapter, Course, Question, ClinicalCase
 
@@ -25,45 +31,36 @@ def home(request):
     return render(request, template_name="quizz/index.html")
 
 
-# TODO View to return the years ids
 @api_view(["GET"])
 def medical_school_years(request):
-    medical_years = MedicalYear.objects.all()
-    serializer = MedicalSchoolYearSerializer(medical_years, many=True)
-    return Response(serializer.data)
+    response_data = get_medical_years()
+    return Response(response_data)
 
 
 @api_view(["GET"])
 def subjects(request, medical_year_id):
+    # This is important if client tries to access a medical year that dosen't exist
+    medical_year = get_object_or_404(MedicalYear, id=medical_year_id)
 
-    subjects = Subject.objects.filter(medical_year__id=medical_year_id)
-    # Maybe change this error handling to a custom json?
-    if len(subjects) == 0:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = SubjectSerializer(subjects, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    response_data = get_subjects_by_medical_year_id(medical_year_id)
+    return Response(response_data, status=status.HTTP_200_OK)
 
 
 @api_view(["GET"])
 def chapters(request, subject_id):
-    chapters = Chapter.objects.filter(subject__id=subject_id)
-    # Maybe change this error handling to a custom json?
-    if len(chapters) == 0:
-        return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = SubjectSerializer(chapters, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    subject = get_object_or_404(Subject, id=subject_id)
+    response_data = get_chapters_by_subject_id(subject_id)
+
+    return Response(response_data, status=status.HTTP_200_OK)
 
 
 @api_view(["GET"])
 def courses(request, chapter_id):
-    courses = Course.objects.filter(chapter_id=chapter_id)
-    # Maybe change this error handling to a custom json?
-    if len(courses) == 0:
-        return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = CourseSerializer(courses, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    chapter = get_object_or_404(Chapter, id=chapter_id)
+    response_data = get_courses_by_chapter_id(chapter_id)
+    return Response(response_data, status=status.HTTP_200_OK)
 
 
 # View to get the available years for the questions or the clinical cases according
