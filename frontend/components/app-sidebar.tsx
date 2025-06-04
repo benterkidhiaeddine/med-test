@@ -20,7 +20,7 @@ const items = [
   },
   {
     title: "Revision Session",
-    url: "#",
+    url: "/dashboard/quizz-selection",
     icon: Inbox,
   },
 ];
