@@ -18,16 +18,16 @@ import {
 
 export default function QuizzSelection() {
   const [selectedMedicalYear, setSelectedMedicalYear] = useState<string>("");
-  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [medicalYears, setMedicalYears] = useState<MedicalYear[]>([]);
+  const [selectedSubject, setSelectedSubject] = useState<string>("");
   const [subjects, setSubjects] = useState<MultiSelectType[]>([]);
 
   useEffect(() => {
     fetchMedicalYears().then(setMedicalYears);
   }, []);
 
-  function handleMedicalYearSelection(medicalYear) {
-    setSelectedSubjects([]);
+  function handleMedicalYearSelection(medicalYear: string) {
+    setSelectedSubject("");
     setSelectedMedicalYear(medicalYear);
     fetchSubjects(medicalYear).then((subjects) => {
       const labledSubjects = subjects.map((subject: Subject) => {
@@ -39,28 +39,6 @@ export default function QuizzSelection() {
       setSubjects(labledSubjects);
     });
   }
-
-  // when a medical Year is selected
-  /*
-  useEffect(() => {
-
-    console.log(selectedSubjects);
-    // reset the list of selected subjects
-    setSelectedSubjects([]);
-    console.log(selectedSubjects);
-
-    // fetch the new subjects after selecting the medical year
-    fetchSubjects(selectedMedicalYear).then((subjects) => {
-      const labledSubjects = subjects.map((subject: Subject) => {
-        return {
-          label: subject.name,
-          value: subject.id,
-        };
-      });
-      setSubjects(labledSubjects);
-    });
-  }, [selectedMedicalYear]);
-  */
 
   return (
     <form className="flex flex-col items-center gap-6 mt-10">
@@ -83,17 +61,22 @@ export default function QuizzSelection() {
         </Select>
       </div>
 
-      {/* Subjects */}
       <div className="flex flex-col items-start w-[250px]">
         <label className="mb-1 text-sm font-medium text-gray-700">
           Subject(s)
         </label>
-        <MultiSelect
-          options={subjects}
-          onValueChange={setSelectedSubjects}
-          value={selectedSubjects}
-          placeholder="Select Subject(s)"
-        />
+        <Select onValueChange={setSelectedSubject}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select Subject" />
+          </SelectTrigger>
+          <SelectContent>
+            {subjects.map((subject) => (
+              <SelectItem key={subject?.value} value={subject?.value}>
+                {subject?.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
     </form>
   );
